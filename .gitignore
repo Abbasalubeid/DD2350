@@ -21,3 +21,26 @@ bin/
 *.nar
 hs_err_pid*
 replay_pid*
+
+
+##############################
+## TeX & LaTeX
+##############################
+*.aux
+*.bbl
+*.blg
+*.brf
+*.dvi
+*.lof
+*.log
+*.lot
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.pdf
+*.out
+*.nav
+*.snm
+*.vrb
+*~
