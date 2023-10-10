@@ -32,6 +32,7 @@ public class PyramidStacker {
     public static int maxStackedPyramids(Pyramid[] pyramids) {
         int n = pyramids.length;
         int[] memo = new int[n];
+        
     
         Arrays.fill(memo, 1);
     
@@ -40,22 +41,17 @@ public class PyramidStacker {
     
         System.out.println("Sorted Pyramids: " + Arrays.toString(pyramids));
     
+        int maxVal = 0;
         for (int i = 1; i < n; i++) {
             for (int j = 0; j < i; j++) {
                 if (pyramids[j].canFitInside(pyramids[i])) {
                     memo[i] = Math.max(memo[i], memo[j] + 1);
+                    maxVal = Math.max(maxVal, memo[i]);
                 }
             }
         }
     
-        System.out.println("memo Results: " + Arrays.toString(memo));
-    
-        int maxVal = memo[0];
-        for (int i = 1; i < n; i++) {
-            if (memo[i] > maxVal) {
-                maxVal = memo[i];
-            }
-        }
+        System.out.println("memo results: " + Arrays.toString(memo));
     
         return maxVal;
     }
