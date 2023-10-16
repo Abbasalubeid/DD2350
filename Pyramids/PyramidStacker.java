@@ -34,15 +34,15 @@ public class PyramidStacker {
         int[] memo = new int[n];
         
     
-        Arrays.fill(memo, 1);
-    
         // Sort pyramids based on s and then h.
         Arrays.sort(pyramids);
     
         System.out.println("Sorted Pyramids: " + Arrays.toString(pyramids));
     
         int maxVal = 0;
+        memo[0] = 1;
         for (int i = 1; i < n; i++) {
+            memo[i] = 1; // Default subsequence is 1
             for (int j = 0; j < i; j++) {
                 if (pyramids[j].canFitInside(pyramids[i])) {
                     memo[i] = Math.max(memo[i], memo[j] + 1);
@@ -58,12 +58,18 @@ public class PyramidStacker {
     
 
     public static void main(String[] args) {
-        Pyramid[] pyramids = {
+/*         Pyramid[] pyramids = {
             new Pyramid(2, 3),
             new Pyramid(3, 5),
             new Pyramid(1, 1),
             new Pyramid(4, 6),
             new Pyramid(5, 2)
+        }; */
+
+        Pyramid[] pyramids = {
+            new Pyramid(2, 3),
+            new Pyramid(4, 4),
+            new Pyramid(3, 2),
         };
 
         System.out.println("Input Pyramids: " + Arrays.toString(pyramids));
