@@ -64,9 +64,7 @@ public class CheapNumbering {
         List<Integer> optimalNumbering = new ArrayList<>();
         int minSum = Integer.MAX_VALUE;
 
-        List<List<Integer>> allPermutations = new ArrayList<>();
-        generatePermutations(new ArrayList<>(vertices), vertices.size(), allPermutations);
-
+        List<List<Integer>> allPermutations = generatePermutations(new ArrayList<>(vertices), vertices.size());
         
         for (List<Integer> currentPermutation : allPermutations) {
             int currentSum = 0;
@@ -100,33 +98,34 @@ public class CheapNumbering {
     }
 
 
-    //Heap’s Algorithm for generating permutations
+    // Heap’s Algorithm for generating permutations
     // Time Complexity: O(N*N!), where N is the size of the given array 'a'
-    private void generatePermutations(List<Integer> a, int size, List<List<Integer>> allPermutations) {
+    private List<List<Integer>> generatePermutations(List<Integer> a, int size) {
+        List<List<Integer>> allPermutations = new ArrayList<>();
+    
         if (size == 1) {
             allPermutations.add(new ArrayList<>(a));
-            return;
+            return allPermutations;
         }
-
+    
         for (int i = 0; i < size; i++) {
-            generatePermutations(a, size - 1, allPermutations);
-
-
+            allPermutations.addAll(generatePermutations(a, size - 1));
+    
+            // If size is odd, swap the first and the last element
+            // Otherwise, swap the ith and the last element
             if (size % 2 == 1) {
                 Collections.swap(a, 0, size - 1);
             } else {
                 Collections.swap(a, i, size - 1);
             }
         }
+    
+        return allPermutations;
     }
-
-// ... (rest of the code below remains unchanged)
-
     
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int optimalDiffs = 0;
         
         // Get user input for the number of vertices
         System.out.print("Enter the number of vertices: ");
