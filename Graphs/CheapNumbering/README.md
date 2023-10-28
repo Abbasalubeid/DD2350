@@ -21,39 +21,39 @@ Consider a simple graph with numbered vertices like the following: 1, 2, and 3 f
 
 ![Simple Graph Representation](graph.png)
 
-Since there are 3 vertices, the algorithm needs to examine all \(3! = 6\) permutations of the numbers [1, 2, 3]. It is a prerequisite that all nodes in the graph are identified by numbers. These numbers index the permutations, eliminating the need for actual numbering of the nodes, since the desired output is a function. For each number in a permutation, a node identifier is mapped to it. When the best permutation is found, this map becomes our output.
+Since there are 3 vertices, the algorithm needs to examine all 3! = 6 permutations of the numbers [1, 2, 3]. It is a prerequisite that all nodes in the graph are identified by numbers. These numbers index the permutations, eliminating the need for actual numbering of the nodes, since the desired output is a function. For each number in a permutation, a node identifier is mapped to it. When the best permutation is found, this map becomes our output.
 
 For example:
 
-1. \([1,2,3]\) denotes the mapping \(1 \mapsto 1, 2 \mapsto 2, 3 \mapsto 3\):
-    - Absolute difference sum: \(|1-2| + |2-3| = 2\).
+1. [1,2,3] denotes the mapping 1 -> 1, 2 -> 2, 3 -> 3:
+    - Absolute difference sum: |1-2| + |2-3| = 2.
 
-2. \([2,1,3]\) denotes the mapping \(1 \mapsto 2, 2 \mapsto 1, 3 \mapsto 3\):
-    - Absolute difference sum: \(|2-1| + |1-3| = 3\).
+2. [2,1,3] denotes the mapping 1 -> 2, 2 -> 1, 3 -> 3:
+    - Absolute difference sum: |2-1| + |1-3| = 3.
 
-3. \([3,2,1]\) denotes the mapping \(1 \mapsto 3, 2 \mapsto 2, 3 \mapsto 1\):
-    - Absolute difference sum: \(|3-2| + |2-1| = 2\).
+3. [3,2,1] denotes the mapping 1 -> 3, 2 -> 2, 3 -> 1:
+    - Absolute difference sum: |3-2| + |2-1| = 2.
 
-From these permutations above, we observe that the mappings yielding the minimal sum of 2 are the optimal solutions. For instance, an optimal permutation would be [3,2,1] which denotes the mapping \(1 \mapsto 3, 2 \mapsto 2, 3 \mapsto 1\) and this mapping could serve as the desired bijective function.
+From these permutations above, we observe that the mappings yielding the minimal sum of 2 are the optimal solutions. For instance, an optimal permutation would be [3,2,1] which denotes the mapping 1 -> 3, 2 -> 2, 3 -> 1 and this mapping could serve as the desired bijective function.
 
-However, we cannot draw this conclusion until all \(3!\) possible permutations for these vertices are examined.
+However, we cannot draw this conclusion until all 3! possible permutations for these vertices are examined.
 
 ## Time Complexity Analysis
 
-Let \(V\) be the number of vertices and \(E\) be the number of edges in the given graph. The non-constant operations in the algorithm that contribute to its time complexity are broken down as follows:
+Let V be the number of vertices and E be the number of edges in the given graph. The non-constant operations in the algorithm that contribute to its time complexity are broken down as follows:
 
-1. **Generating permutations**: Using Heap's algorithm, generating all possible permutations of the \(V\) vertices takes:
-    \[ T_1(n) = O(V \times V!) \]
+1. **Generating permutations**: Using Heap's algorithm, generating all possible permutations of the V vertices takes:
+    - T1(n) = O(V x V!)
 2. **Iteration over permutations and evaluating edges**: For each permutation, we evaluate all edges of the graph. This operation takes:
-    \[ T_2(n) = O(V!) \times O(V + E) = O((V + E) \times V!) \]
-3. **Assignment to Map**: Assigning values to the map \(f\) for \(V\) vertices.
-    \[ T_3(n) = O(V) \]
+    - T2(n) = O(V!) x O(V + E) = O((V + E) x V!)
+3. **Assignment to Map**: Assigning values to the map `f` for V vertices.
+    - T3(n) = O(V)
 
 Combining the individual complexities, the total time complexity is:
-\[ T(n) = O(V! \times (V + E)) \]
+- T(n) = O(V! x (V + E))
 
 ## Complexity Insights
 
-**Edge Iteration with an Adjacency List**: Before delving into the primary complexity bounds, it is crucial to note the characteristics of the adjacency list. Iterating through edges with an adjacency list has a typical time complexity of \(O(V + E)\).
+**Edge Iteration with an Adjacency List**: Before delving into the primary complexity bounds, it is crucial to note the characteristics of the adjacency list. Iterating through edges with an adjacency list has a typical time complexity of O(V + E).
 
-**Lower and Upper Bounds** (\(\Omega\) and \(O\)): The algorithm’s nature is exhaustive. Whether the optimal solution is found in the first permutation or the last, all permutations need evaluation. This consistency in behavior determines that the best-case complexity, \(\Omega(V! \times (V + E))\), matches the worst-case scenario, \(O(V! \times (V + E))\).
+**Lower and Upper Bounds**: The algorithm’s nature is exhaustive. Whether the optimal solution is found in the first permutation or the last, all permutations need evaluation. This consistency in behavior determines that the best-case complexity matches the worst-case scenario.
