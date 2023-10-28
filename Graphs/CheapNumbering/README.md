@@ -76,5 +76,6 @@ java CheapNumbering
 1. ***Number of vertices:*** Begin by entering the total number of vertices in the graph.
 2. ***Adjacent vertices:*** For each vertex, input its adjacent vertices separated by spaces. If there are no adjacent vertices for a given vertex, simply press Enter.
 
-**Output**
+**Output:**
+
 The program will first visualize the graph structure, showcasing each vertex and its connections. After performing its exhaustive search, the program will present an optimal numbering. This numbering aims to minimize the sum of differences between adjacent vertices in the graph. The optimal numbering will be represented as a bijective mapping of vertices to numbers.
