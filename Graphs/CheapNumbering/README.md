@@ -57,4 +57,24 @@ Combining the individual complexities, the total time complexity is:
 **Edge Iteration with an Adjacency List**: Before delving into the primary complexity bounds, it is crucial to note the characteristics of the adjacency list. Iterating through edges with an adjacency list has a typical time complexity of `O(V + E)`. In the worst-case scenario, such as in a complete graph where `E` can approach `V(V-1)/2`, the time complexity would be `O(V^2)`. Yet, given the dominant `V!` term in our algorithm, these variations in the edge iteration are overshadowed. For the sake of our analysis, edge iteration complexities, whether favorable or otherwise, are regarded as having consistent bounds.
 
 
-**Lower and Upper Bounds**: The algorithm’s nature is exhaustive. Whether the optimal solution is found in the first permutation or the last, all permutations need evaluation. This consistency in behavior determines that the best-case complexity matches the worst-case scenario.
+**Lower and Upper Bounds** (Ω and O): The algorithm’s nature is exhaustive. Whether the optimal solution is found in the first permutation or the last, all permutations need evaluation. This consistency in behavior determines that the best-case complexity, Ω(V! × (V + E)), matches the worst-case scenario, O(V! × (V + E)). In simpler terms, regardless of graph attributes like sparsity or symmetry, the algorithm’s processing time remains fundamentally unchanged.
+
+**Tight Bound** (Θ): The congruence between the algorithm's lower and upper bounds leads to a tight complexity of Θ(V! × (V + E)).
+
+## Usage
+
+**Compile the Program**
+```bash
+javac CheapNumbering.java
+```
+
+**Run the Program**
+```bash
+java CheapNumbering
+```
+**Input:**
+1. ***Number of vertices:*** Begin by entering the total number of vertices in the graph.
+2. ***Adjacent vertices:*** For each vertex, input its adjacent vertices separated by spaces. If there are no adjacent vertices for a given vertex, simply press Enter.
+
+**Output**
+The program will first visualize the graph structure, showcasing each vertex and its connections. After performing its exhaustive search, the program will present an optimal numbering. This numbering aims to minimize the sum of differences between adjacent vertices in the graph. The optimal numbering will be represented as a bijective mapping of vertices to numbers.
