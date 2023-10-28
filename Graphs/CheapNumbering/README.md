@@ -54,6 +54,7 @@ Combining the individual complexities, the total time complexity is:
 
 ## Complexity Insights
 
-**Edge Iteration with an Adjacency List**: Before delving into the primary complexity bounds, it is crucial to note the characteristics of the adjacency list. Iterating through edges with an adjacency list has a typical time complexity of O(V + E). 
+**Edge Iteration with an Adjacency List**: Before delving into the primary complexity bounds, it is crucial to note the characteristics of the adjacency list. Iterating through edges with an adjacency list has a typical time complexity of `O(V + E)`. In the worst-case scenario, such as in a complete graph where `E` can approach `V(V-1)/2`, the time complexity would be `O(V^2)`. Yet, given the dominant `V!` term in our algorithm, these variations in the edge iteration are overshadowed. For the sake of our analysis, edge iteration complexities, whether favorable or otherwise, are regarded as having consistent bounds.
+
 
 **Lower and Upper Bounds**: The algorithm’s nature is exhaustive. Whether the optimal solution is found in the first permutation or the last, all permutations need evaluation. This consistency in behavior determines that the best-case complexity matches the worst-case scenario.
