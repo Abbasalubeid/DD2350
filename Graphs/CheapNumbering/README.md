@@ -43,14 +43,14 @@ However, we cannot draw this conclusion until all 3! possible permutations for t
 Let V be the number of vertices and E be the number of edges in the given graph. The non-constant operations in the algorithm that contribute to its time complexity are broken down as follows:
 
 1. **Generating permutations**: Using Heap's algorithm, generating all possible permutations of the V vertices takes:
-    - T1(n) = O(V x V!)
+    - T1(n) = `O(V x V!)`
 2. **Iteration over permutations and evaluating edges**: For each permutation, we evaluate all edges of the graph. This operation takes:
-    - T2(n) = O(V!) x O(V + E) = O((V + E) x V!)
+    - T2(n) = `O(V!) x O(V + E) = O((V + E) x V!)`
 3. **Assignment to Map**: Assigning values to the map `f` for V vertices.
-    - T3(n) = O(V)
+    - T3(n) = `O(V)`
 
 Combining the individual complexities, the total time complexity is:
-- T(n) = O(V! x (V + E))
+- T(n) = `O(V! x (V + E))`
 
 ## Complexity Insights
 
