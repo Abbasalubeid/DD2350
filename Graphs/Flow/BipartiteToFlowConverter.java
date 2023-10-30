@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class BipartiteToFlowConverter {
 
@@ -6,16 +6,16 @@ public class BipartiteToFlowConverter {
     private ArrayList<Edge> edges = new ArrayList<>();
     private Kattio io;
 
-    private class Edge {
-        int from, to;
-        Edge(int from, int to) {
+    public static class Edge {
+        public int from, to;
+        public Edge(int from, int to) {
             this.from = from;
             this.to = to;
         }
     }
 
-    public BipartiteToFlowConverter() {
-        io = new Kattio(System.in, System.out);
+    public BipartiteToFlowConverter(Kattio io) {
+        this.io = io;
     }
 
     public void readInput() {
@@ -56,11 +56,37 @@ public class BipartiteToFlowConverter {
         io.flush();
     }
 
+    // Transform the bipartite graph into a flow network suitable for the Edmonds-Karp algorithm
+    public List<EdmondsKarpList.Edge> generateFlowGraph(int xSize, int ySize, List<Edge> bipartiteEdges) {
+        List<EdmondsKarpList.Edge> flowEdges = new ArrayList<>();
+
+        int source = xSize + ySize + 1;
+        int sink = xSize + ySize + 2;
+
+        // Connect the source to each vertex in set X. 
+        for (int i = 1; i <= xSize; i++) {
+            flowEdges.add(new EdmondsKarpList.Edge(source, i, 1));
+        }
+
+        // Retain the original bipartite edges between set X and set Y.
+        for (Edge edge : bipartiteEdges) {
+            flowEdges.add(new EdmondsKarpList.Edge(edge.from, edge.to, 1));
+        }
+
+        // Connect each vertex in set Y to the sink.
+        for (int i = xSize + 1; i <= xSize + ySize; i++) {
+            flowEdges.add(new EdmondsKarpList.Edge(i, sink, 1));
+        }
+
+        return flowEdges;
+    }
+
+
     public void readMaxFlowSolution() {
-        int numOfVertices = io.getInt();
+        io.getInt(); // Number of vertices
         int s = io.getInt(); 
         int t = io.getInt(); 
-        int totalFlow = io.getInt(); 
+        io.getInt(); // Total flow 
         int numOfEdgesWithPositiveFlow = io.getInt();
 
         // Clear existing edges and fill with maxflow solution
@@ -76,8 +102,6 @@ public class BipartiteToFlowConverter {
     }
 
     public void writeBipMatchSolution() {
-        // Displaying number of vertices in the matching: |X| and |Y|
-        io.println(xSize + " " + ySize);
         
         // Displaying number of matching edges
         io.println(edges.size());
@@ -87,10 +111,29 @@ public class BipartiteToFlowConverter {
             io.println(edge.from + " " + edge.to);
         }
     }
+
+    public void processAndPrintFlowSolution(EdmondsKarpList.FlowSolution solution) {
+        // Extract the bipartite matching from the flow solution
+        int s = solution.source;
+        int t = solution.sink;
+    
+        edges.clear();
+        for (EdmondsKarpList.Edge edge : solution.edges) {
+            if (edge.from != s && edge.to != t) {
+                edges.add(new Edge(edge.from, edge.to));
+            }
+        }
+    
+        // Print the bipartite matching solution
+        writeBipMatchSolution();
+    }
+    
     
 
     public static void main(String[] args) {
-        BipartiteToFlowConverter converter = new BipartiteToFlowConverter();
+        Kattio io = new Kattio(System.in, System.out);
+        BipartiteToFlowConverter converter = new  BipartiteToFlowConverter(io);
+
         converter.readInput();
         converter.transformToFlow();
         converter.readMaxFlowSolution();
