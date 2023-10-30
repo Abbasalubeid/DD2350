@@ -46,10 +46,16 @@ public class EdmondsKarpList {
 
     public int execute(int source, int sink) {
         int maxFlow = 0;
+
+        // Map to track the path found by BFS. It maps a node to its preceding edge in the path.
         Map<Integer, Edge> parent = new HashMap<>();
 
+        // Find augmenting paths using BFS until no more such paths exist.
         while (BFS(source, sink, parent)) {
             int pathFlow = INF;
+
+            // Traverse the path from sink to source to find the bottleneck value.
+            // The bottleneck is the smallest residual capacity along the augmenting path.
             int s = sink;
             while (s != source) {
                 Edge edgeToParent = parent.get(s);
@@ -59,6 +65,7 @@ public class EdmondsKarpList {
 
             maxFlow += pathFlow;
 
+            
             int v = sink;
             while (v != source) {
                 Edge edgeToParent = parent.get(v);
@@ -75,16 +82,29 @@ public class EdmondsKarpList {
     private boolean BFS(int source, int sink, Map<Integer, Edge> parent) {
         Set<Integer> visited = new HashSet<>();
         Queue<Integer> queue = new LinkedList<>();
+
+        // Start BFS traversal from the source node.
         queue.add(source);
         visited.add(source);
 
         while (!queue.isEmpty()) {
             int u = queue.poll();
+
+            // For each edge leaving the node 'u':
             for (Edge edge : graph.get(u)) {
+                // If the ending node of the edge hasn't been visited and the edge has positive
+                // residual capacity:
                 if (!visited.contains(edge.to) && edge.capacity > edge.flow) {
+                    // Add this edge to the parent map to keep track of the path.
                     parent.put(edge.to, edge);
+
+                    // Mark the ending node of the edge as visited.
                     visited.add(edge.to);
+
                     queue.add(edge.to);
+
+                    // If we've reached the sink node, then we've found an augmenting path and we
+                    // return true.
                     if (edge.to == sink) {
                         return true;
                     }
@@ -145,8 +165,6 @@ public class EdmondsKarpList {
             this.edges = edges;
         }
     }
-    
-
 
     public static void main(String[] args) {
         Kattio io = new Kattio(System.in, System.out);
