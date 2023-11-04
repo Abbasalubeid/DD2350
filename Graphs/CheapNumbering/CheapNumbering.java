@@ -104,7 +104,6 @@ private List<List<Integer>> generatePermutations(List<Integer> a, int size) {
     List<List<Integer>> allPermutations = new ArrayList<>();
 
     if (size == 1) {
-        System.out.println("hej: " + a);
         allPermutations.add(new ArrayList<>(a));
         return allPermutations;
     }
