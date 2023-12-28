@@ -4,18 +4,6 @@ Design principles of algorithms: Decomposition, greedy algorithms, dynamic progr
 
 Data structures: Review of hash tables and heaps; balanced trees, Bloom filters, persistent data structures Use and implementation of data structures. Computability and complexity: The concept of reduction, the complexity classes P (polynomial time) and NP (non-deterministic polynomial time). NP-complete problems, undecidable problems. Coping with computationally intractable problems.
 
-- **Probability theory:** 
-  - probability, conditional probability, independence
-  - one-dimensional random variables
-  - briefing about multi-dimensional random variables
-  - common distributions
-  - measures (location, spreading and dependence)
-  - Law of Large Numbers, Central Limit Theorem
-- **Statistics:** 
-  - point estimates, confidence intervals
-  - hypothesis test
-  - regression analysis, correlation, graphical presentation of data.
-
 ## Intended learning outcomes
 
 After passing the course, the student should be able to
